@@ -8,13 +8,13 @@ import org.springframework.stereotype.Repository;
 
 import com.globanttest.domain.events.AccountEvent;
 
-@Repository
+
 public class AccountInMemoryRepository implements AccountEventRepository {
 
 	private List<AccountEvent> events = new ArrayList<>();
 	
 	@Override
-	public void persist(AccountEvent event) {
+	public void persist(AccountEvent event) throws Exception {
 		events.add(event);
 	}
 

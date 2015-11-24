@@ -7,7 +7,7 @@ import com.globanttest.domain.events.AccountEventType;
 public class AccountRequest {
 	
 	private BigDecimal balance;
-	private Long transactionID;
+	private Long accountId;
 	private AccountEventType accountEventType;
 	
 	public BigDecimal getBalance() {
@@ -16,11 +16,12 @@ public class AccountRequest {
 	public void setBalance(BigDecimal balance) {
 		this.balance = balance;
 	}
-	public Long getTransactionID() {
-		return transactionID;
+	
+	public Long getAccountId() {
+		return accountId;
 	}
-	public void setTransactionID(Long transactionID) {
-		this.transactionID = transactionID;
+	public void setAccountId(Long accountId) {
+		this.accountId = accountId;
 	}
 	public AccountEventType getAccountEventType() {
 		return accountEventType;

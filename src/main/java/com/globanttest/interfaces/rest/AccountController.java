@@ -32,13 +32,18 @@ public class AccountController {
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/accounts/{accountId}",method = RequestMethod.PUT)
+	@RequestMapping(value="/accounts/{accountId}",method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<String> debitAccountEvent(@RequestBody AccountRequest accountRequest,@PathVariable Long accountID){
-		if(accountRequest.getAccountEventType() == AccountEventType.DEBIT)
-			accountService.debitAccount(accountRequest.getBalance(),accountID);
-		else if(accountRequest.getAccountEventType() == AccountEventType.CREDIT)
-			accountService.creditAccount(accountRequest.getBalance(),accountID);
+	public ResponseEntity<String> debitAccountEvent(@RequestBody AccountRequest accountRequest,@PathVariable Long accountId){
+		if((accountRequest.getBalance().compareTo(BigDecimal.ZERO) < 0)){
+			accountRequest.setAccountEventType(AccountEventType.DEBIT);
+			accountService.debitAccount(accountRequest.getBalance(),accountId);
+		}else if((accountRequest.getBalance().compareTo(BigDecimal.ZERO) == 0)){
+			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		}else{
+			accountRequest.setAccountEventType(AccountEventType.CREDIT);
+			accountService.creditAccount(accountRequest.getBalance(),accountId);
+		}
 			
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}

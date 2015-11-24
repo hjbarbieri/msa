@@ -21,20 +21,35 @@ public class AccountServiceImpl implements AccountService {
 	@Override
 	public void openAccount(BigDecimal balance) {
 		OpenAccountCommand accountOpenCommand = new OpenAccountCommand(balance);
-		account.processOpenAccount(accountOpenCommand);
+		try {
+			account.processOpenAccount(accountOpenCommand);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
-	public void debitAccount(BigDecimal balance, Long transactionID) {
-		DebitAccountCommand debitAccountCommand = new DebitAccountCommand(balance, transactionID);
-		account.processDebitAccount(debitAccountCommand);
+	public void debitAccount(BigDecimal balance, Long accountId) {
+		DebitAccountCommand debitAccountCommand = new DebitAccountCommand(balance, accountId);
+		try {
+			account.processDebitAccount(debitAccountCommand);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	
 	@Override
-	public void creditAccount(BigDecimal balance, Long transactionID) {
-		CreditAccountCommand creditAccountCommand = new CreditAccountCommand(balance, transactionID);
-		account.processCreditAccount(creditAccountCommand);
+	public void creditAccount(BigDecimal balance, Long accountId) {
+		CreditAccountCommand creditAccountCommand = new CreditAccountCommand(balance, accountId);
+		try {
+			account.processCreditAccount(creditAccountCommand);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	

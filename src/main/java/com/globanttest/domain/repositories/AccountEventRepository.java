@@ -4,7 +4,7 @@ import com.globanttest.domain.events.AccountEvent;
 
 public interface AccountEventRepository {
 
-	void persist(AccountEvent event);
+	void persist(AccountEvent event) throws Exception;
 	
 	
 }

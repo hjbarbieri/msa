@@ -6,8 +6,8 @@ public interface AccountService {
 	
 	public void openAccount(BigDecimal balance);
 
-	public void debitAccount(BigDecimal balance, Long transactionID);
+	public void debitAccount(BigDecimal balance, Long accountId);
 
-	void creditAccount(BigDecimal balance, Long transactionID);
+	void creditAccount(BigDecimal balance, Long accountId);
 
 }
