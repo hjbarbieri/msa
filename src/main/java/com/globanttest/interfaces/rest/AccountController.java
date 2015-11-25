@@ -24,7 +24,7 @@ public class AccountController {
 
 	@RequestMapping(value="/accounts",method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<String> openAccountEvent(@RequestBody AccountRequest accountOpenRequest){
+	public ResponseEntity<String> openAccount(@RequestBody AccountRequest accountOpenRequest){
 		if((accountOpenRequest.getBalance().compareTo(BigDecimal.ZERO) < 0))
 			return new ResponseEntity<String>(HttpStatus.EXPECTATION_FAILED);
 		
@@ -34,7 +34,7 @@ public class AccountController {
 	
 	@RequestMapping(value="/accounts/{accountId}",method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<String> debitAccountEvent(@RequestBody AccountRequest accountRequest,@PathVariable Long accountId){
+	public ResponseEntity<String> debitCreditAccount(@RequestBody AccountRequest accountRequest,@PathVariable Long accountId){
 		if((accountRequest.getBalance().compareTo(BigDecimal.ZERO) < 0)){
 			accountRequest.setAccountEventType(AccountEventType.DEBIT);
 			accountService.debitAccount(accountRequest.getBalance(),accountId);
