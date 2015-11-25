@@ -1,7 +1,6 @@
 package com.globanttest.domain;
 
 import java.math.BigDecimal;
-import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,10 +18,13 @@ public class Account {
 	@Autowired
 	private AccountEventRepository accountEventRepository;
 
+	@Autowired
+	private GeneratorId generatorId;
+	
 	private BigDecimal balance;
 
 	public void processOpenAccount(OpenAccountCommand accountOpenCommand) throws Exception {
-		AccountEvent accountOpenEvent = new AccountEvent(accountOpenCommand.getInitialBalance(),getRandomId(),AccountEventType.OPEN);
+		AccountEvent accountOpenEvent = new AccountEvent(accountOpenCommand.getInitialBalance(),generatorId.getRandomId(),AccountEventType.OPEN);
 		
 		accountEventRepository.persist(accountOpenEvent);
 		
@@ -40,25 +42,8 @@ public class Account {
 		
 	}
 	
-	private Long getRandomId(){
-		long range = 1234567L;
-		Random r = new Random(); 
-		long x = nextLong(r,range);
-		
-		return x;
-	}
+	
 
-	private long nextLong(Random rng, long n) {
-		   // error checking and 2^x checking removed for simplicity.
-		   long bits, val;
-		   do {
-		      bits = (rng.nextLong() << 1) >>> 1;
-		      val = bits % n;
-		   } while (bits-val+(n-1) < 0L);
-		   return val;
-		}
-	
-	
 	public BigDecimal getBalance() {
 		return balance;
 	}

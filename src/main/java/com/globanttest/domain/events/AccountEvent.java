@@ -28,6 +28,44 @@ public class AccountEvent implements Serializable{
 	public AccountEventType getAccountType() {
 		return accountType;
 	}
+	
+	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((accountId == null) ? 0 : accountId.hashCode());
+		result = prime * result
+				+ ((accountType == null) ? 0 : accountType.hashCode());
+		result = prime * result + ((amount == null) ? 0 : amount.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AccountEvent other = (AccountEvent) obj;
+		if (accountId == null) {
+			if (other.accountId != null)
+				return false;
+		} else if (!accountId.equals(other.accountId))
+			return false;
+		if (accountType != other.accountType)
+			return false;
+		if (amount == null) {
+			if (other.amount != null)
+				return false;
+		} else if (!amount.equals(other.amount))
+			return false;
+		return true;
+	}
 
 	@Override
 	public String toString() {
